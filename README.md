@@ -10,6 +10,10 @@ Requires a [Ruby interpreter](https://www.ruby-lang.org/en/) in your path.
 Download your Play History and shows a summary of your runs - 
 Usage: `playHistory.rb` to see usage message
 
+### DE.rb
+Disenchant all legendaries that are higher than level 1 and recreate them.  All materials are stored on the server.  Your client will need to be refreshed to see changes.
+Usage: `DE.rb` to see usage message
+
 ## Random batch scripts
 Many of these tools require [jq](https://stedolan.github.io/jq/), [curl](https://curl.haxx.se/), and [toast](https://github.com/nels-o/toaster)
 
@@ -19,6 +23,10 @@ Simply watches your userDetails to see if event_tokens are in your account yet. 
 Usage: `watchForEvent.bat idlemaster <USERID> <HASH>`
 
 ## ToDo
+### enchant.rb
+Enchant legendaries according to `legendaries.txt`.  Your client will need to be refreshed to see changes.
+Usage: `DE.rb` to see usage message
+
 - Remove hard-coding of paths for tools
 - playHistory.rb
   - specify server
