@@ -1,3 +1,4 @@
 users.txt
 /*.cache
-/*.cache.json
+/.idea
+/*.iml

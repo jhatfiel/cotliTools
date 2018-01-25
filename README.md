@@ -1,18 +1,63 @@
 # cotliTools
-A Collection of tools for Crusaders of the Lost Idols
+A Collection of tools for Crusaders of the Lost Idols.
 
-You will need your User ID and hash (easiest way to get these is by looking at the network log in Chrome's Dev Tools for any calls to post.php, then looking at the Request Headers)
+You will need your User ID and hash (easiest way to get these is by looking at the network log in Chrome's Dev Tools for any calls to post.php, then looking at the Request Headers).
+
+The first time you specify your User ID and hash when running a script, it will be saved in a cache file and you won't have to specify it again.
 
 ## Ruby scripts
 Requires a [Ruby interpreter](https://www.ruby-lang.org/en/) in your path.
 
-### playHistory.rb
-Download your Play History and shows a summary of your runs - 
-Usage: `playHistory.rb` to see usage message
-
 ### DE.rb
-Disenchant all legendaries that are higher than level 1 and recreate them.  All materials are stored on the server.  Your client will need to be refreshed to see changes.
+Manipulate legendary levels.  All materials are stored on the server.
+  
+       NOTE!!!!
+  
+   __***Your client will need to be refreshed to see changes.***__
+
+       NOTE!!!!
+       
 Usage: `DE.rb` to see usage message
+
+#####Example usages:
+
+- Show your current legendary levels
+
+   `DE.rb`
+   
+- Use cached defines file (when new gear is available, you should leave this out.  Note, your user details are never cached, they are loaded every time.)
+
+   `DE.rb -c`
+   
+- Save your current legendary levels to the default file (`<server>.legendaries.yml.cache`)
+
+   `DE.rb -S`
+   
+- Save your current legendary levels to a specified file
+
+   `DE.rb -Snormal.legendaries.yml.cache`
+   
+- Disenchant all legendaries that higher than level 1, then re-create them at level 1
+
+   `DE.rb -D`
+   
+- Attempt to restore all legendary items to the level listed in the default file
+
+   `DE.rb -R`
+
+- Attempt to restore all legendary items to the level listed in the specified file
+
+   `DE.rb -Rnormal.legendaries.yml.cache`
+   
+- These can all be strung together to do something like: Save current levels, disenchant everything, and switch to a robot-specific formation
+
+   `DE.rb -Snormal.legendaries.yml.cache -D -Rrobot.legendaries.yml.cache`
+   
+
+### playHistory.rb
+Download your Play History and shows a summary of your runs.
+
+Usage: `playHistory.rb` to see usage message
 
 ## Random batch scripts
 Many of these tools require [jq](https://stedolan.github.io/jq/), [curl](https://curl.haxx.se/), and [toast](https://github.com/nels-o/toaster)
@@ -23,10 +68,6 @@ Simply watches your userDetails to see if event_tokens are in your account yet. 
 Usage: `watchForEvent.bat idlemaster <USERID> <HASH>`
 
 ## ToDo
-### enchant.rb
-Enchant legendaries according to `legendaries.txt`.  Your client will need to be refreshed to see changes.
-Usage: `DE.rb` to see usage message
-
 - Remove hard-coding of paths for tools
 - playHistory.rb
   - specify server
