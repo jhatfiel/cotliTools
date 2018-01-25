@@ -19,7 +19,7 @@ Manipulate legendary levels.  All materials are stored on the server.
        
 Usage: `DE.rb` to see usage message
 
-#####Example usages:
+#### Example usages:
 
 - Show your current legendary levels
 
