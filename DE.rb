@@ -55,9 +55,6 @@ optionParser = OptionParser.new do |opts|
   end  
 end
 optionParser.parse!
-puts $options[:userId]
-puts $options[:save]
-exit
 
 def saveCredentials(server, userId, hash)
   fn = server + CREDENTIALS_CACHE_SUFFIX
