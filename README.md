@@ -21,6 +21,10 @@ Usage: `DE.rb` to see usage message
 
 #### Example usages:
 
+- First run to initialize your credential cache
+
+   `DE.rb -u<userId> -h<hash>`
+   
 - Show your current legendary levels
 
    `DE.rb`

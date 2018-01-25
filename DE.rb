@@ -29,15 +29,15 @@ optionParser = OptionParser.new do |opts|
     $options[:server] = s
   end  
 
-  opts.on('-D', '--DE', 'Disenchant all legendaries that are above level 1 and re-craft them at level 1') do |d|
+  opts.on('-D', '--disenchant', 'Disenchant all legendaries that are above level 1 and re-craft them at level 1') do |d|
     $options[:disenchant] = d
   end  
 
-  opts.on('-S=[FILE]', '--save=[FILE]', "Save legendary levels that are above level 1 out to <FILE> (defaults to <server>#{LEGENDARIES_CACHE_SUFFIX})") do |f|
+  opts.on('-S[FILE]', '--save=[FILE]', "Save legendary levels that are above level 1 out to <FILE> (defaults to <server>#{LEGENDARIES_CACHE_SUFFIX})") do |f|
     $options[:save] = f || $options[:server] + LEGENDARIES_CACHE_SUFFIX
   end  
 
-  opts.on('-R=[FILE]', '--restore=[FILE]', "Restore legendary levels from <FILE> (defaults to <server>#{LEGENDARIES_CACHE_SUFFIX})") do |f|
+  opts.on('-R[FILE]', '--restore=[FILE]', "Restore legendary levels from <FILE> (defaults to <server>#{LEGENDARIES_CACHE_SUFFIX})") do |f|
     $options[:restore] = f || $options[:server] + LEGENDARIES_CACHE_SUFFIX
   end  
 
@@ -45,8 +45,8 @@ optionParser = OptionParser.new do |opts|
     $options[:server] = s
   end  
 
-  opts.on('-c', '--cache', 'Use only cached data, don\'t update from the server') do |v|
-    $options[:cache] = v
+  opts.on('-c', '--cache', 'Use only cached data, don\'t update from the server') do |c|
+    $options[:cache] = c
   end
 
   opts.on('-?', '--help', 'This help message') do
@@ -55,6 +55,9 @@ optionParser = OptionParser.new do |opts|
   end  
 end
 optionParser.parse!
+puts $options[:userId]
+puts $options[:save]
+exit
 
 def saveCredentials(server, userId, hash)
   fn = server + CREDENTIALS_CACHE_SUFFIX
