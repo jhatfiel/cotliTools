@@ -200,24 +200,22 @@ end
 
 def showLegendaryItems(legendaryItems)
   puts "Current Legendary Items above level 1"
-  legendaryItems.each do |id, item|
-    puts "#{item[:crusader]}'s #{item[:item]}: #{item[:level]} (id=#{item[:id]})" if item[:level] > 1
+  legendaryItems.select { |id, item| item[:level] > 1 }.each do |id, item|
+    puts "#{item[:crusader]}'s #{item[:item]}: #{item[:level]} (id=#{item[:id]})"
   end
 end
 
 def disenchantAll(server, userId, hash, instanceId, legendaryItems)
-  legendaryItems.each do |id, item|
-    if item[:level] > 1
-      callDisenchantLegendary(server, userId, hash, instanceId, item)
-      callCraftLegendary(server, userId, hash, instanceId, item, false)
-      item[:level] = 1
-    end
+  legendaryItems.select { |id, item| item[:level] > 1 }.each do |id, item|
+    callDisenchantLegendary(server, userId, hash, instanceId, item)
+    callCraftLegendary(server, userId, hash, instanceId, item, false)
+    item[:level] = 1
   end
 end
 
 def saveLegendaryLevels(legendaryItems)
   puts "Saving legendary levels to #{$options[:save]}"
-  File.write($options[:save], legendaryItems.to_yaml)
+  File.write($options[:save], legendaryItems.select { |id, item| item[:level] > 1 }.to_yaml)
 end
 
 def restoreLegendaryLevels(server, userId, hash, instanceId, legendaryItems)
@@ -232,19 +230,17 @@ def restoreLegendaryLevels(server, userId, hash, instanceId, legendaryItems)
   newLegendaryItems = YAML.load_file(fn)
 
   ## Loop through the newLegendaryItems
-  newLegendaryItems.each do |id, item|
-    if item[:level] > 1
-      ## Compare the level desired with the current level
-      if legendaryItems[id] 
-        if legendaryItems[id][:level] < item[:level]
-          ## call craftItem enough times to upgrade it
-          (item[:level] - legendaryItems[id][:level]).times do
-            callCraftLegendary(server, userId, hash, instanceId, item, true)
-          end
+  newLegendaryItems.select { |id, item| item[:level] > 1 }.each do |id, item|
+    ## Compare the level desired with the current level
+    if legendaryItems[id] 
+      if legendaryItems[id][:level] < item[:level]
+        ## call craftItem enough times to upgrade it
+        (item[:level] - legendaryItems[id][:level]).times do
+          callCraftLegendary(server, userId, hash, instanceId, item, true)
         end
-      else
-        puts "Cowardly refusing to craft #{item[:crusader]}'s #{item[:item]}.  Please craft the epic to legendary in-game first."
       end
+    else
+      puts "Cowardly refusing to craft #{item[:crusader]}'s #{item[:item]}.  Please craft the epic to legendary in-game first."
     end
   end
 end
