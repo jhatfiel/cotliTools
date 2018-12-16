@@ -1,6 +1,8 @@
 # cotliTools
 A Collection of tools for Crusaders of the Lost Idols.
 
+THIS PROJECT IS ABANDONED AND WILL NOT BE UPDATED
+
 You will need your User ID and hash (easiest way to get these is by looking at the network log in Chrome's Dev Tools for any calls to post.php, then looking at the Request Headers).
 
 The first time you specify your User ID and hash when running a script, it will be saved in a cache file and you won't have to specify it again.
